@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EWF Weddings - Site Under Maintenance</title>
-  <link rel="icon" href="icon.png" type="image/gif" sizes="16x16">
+  <link rel="icon" href="icon.png" type="image/png" sizes="16x16">
   <meta name="description" content="EWF Weddings is undergoing scheduled maintenance. We'll be back shortly." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -14,9 +14,7 @@
 
   <style>
     :root {
-      --bg1: #fffaf5;
-      --bg2: #fef8f2;
-      --bg3: #f7efe7;
+      --bg: #fefaf5;
       --card: #ffffff;
       --ink: #1b1b1b;
       --muted: #6f6f6f;
@@ -44,27 +42,25 @@
       overflow: hidden;
     }
 
-    /* Moving gradient background */
+    /* Gradient hover background */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at 50% 50%, var(--bg1), var(--bg2), var(--bg3));
-      transition: background 0.2s ease-out;
+      background: radial-gradient(circle at 50% 50%, #fff8ef, #fefaf5, #f7efe7);
       z-index: 0;
+      transition: background 0.2s ease-out;
     }
 
     .card {
       position: relative;
       z-index: 1;
+      background: var(--card);
       border-radius: 18px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
       padding: 32px;
       max-width: 640px;
       margin: 24px;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border);
     }
 
     h1 {
@@ -97,8 +93,13 @@
     }
 
     @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.25); }
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.25);
+      }
     }
 
     .footer {
@@ -127,8 +128,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       border: 1px solid var(--accent);
       border-radius: 50%;
       color: var(--accent);
@@ -137,8 +138,8 @@
     }
 
     .icon-link svg {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       stroke: var(--accent);
       stroke-width: 2;
     }
@@ -160,6 +161,12 @@
       color: var(--muted);
       font-size: 14px;
       margin-top: 12px;
+    }
+
+    @media (max-width:640px) {
+      .help-left {
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
@@ -208,13 +215,11 @@
   </main>
 
   <script>
-    // Moves gradient dynamically with cursor
+    // Moving gradient effect following cursor
     document.addEventListener('mousemove', e => {
       const x = (e.clientX / window.innerWidth) * 100;
       const y = (e.clientY / window.innerHeight) * 100;
-      document.body.style.setProperty('--x', x + '%');
-      document.body.style.setProperty('--y', y + '%');
-      document.body.style.background = `radial-gradient(circle at ${x}% ${y}%, var(--bg1), var(--bg2), var(--bg3))`;
+      document.body.style.background = `radial-gradient(circle at ${x}% ${y}%, #fff8ef, #fefaf5, #f7efe7)`;
     });
   </script>
 </body>
