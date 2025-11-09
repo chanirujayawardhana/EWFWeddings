@@ -14,7 +14,9 @@
 
   <style>
     :root {
-      --bg: #fefaf5;
+      --bg1: #fffaf5;
+      --bg2: #fef8f2;
+      --bg3: #f7efe7;
       --card: #ffffff;
       --ink: #1b1b1b;
       --muted: #6f6f6f;
@@ -35,7 +37,6 @@
     body {
       display: grid;
       place-items: center;
-      background: var(--bg);
       color: var(--ink);
       font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
       line-height: 1.6;
@@ -43,32 +44,27 @@
       overflow: hidden;
     }
 
-    /* Gradient hover effect */
+    /* Moving gradient background */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), #fff8ef, #fefaf5, #f7efe7);
-      transition: background 0.25s ease;
+      background: radial-gradient(circle at 50% 50%, var(--bg1), var(--bg2), var(--bg3));
+      transition: background 0.2s ease-out;
       z-index: 0;
     }
 
     .card {
       position: relative;
       z-index: 1;
-      /* background: var(--card);
-      border: 1px solid var(--border);
       border-radius: 18px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
       padding: 32px;
       max-width: 640px;
       margin: 24px;
-      border: 1px solid #23242a;*/
-      border-radius: 18px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
-      padding: 32px;
-      max-width: 640px;
-      margin: 24px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
     }
 
     h1 {
@@ -101,15 +97,8 @@
     }
 
     @keyframes pulse {
-
-      0%,
-      100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.25);
-      }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.25); }
     }
 
     .footer {
@@ -138,8 +127,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       border: 1px solid var(--accent);
       border-radius: 50%;
       color: var(--accent);
@@ -148,8 +137,8 @@
     }
 
     .icon-link svg {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       stroke: var(--accent);
       stroke-width: 2;
     }
@@ -171,12 +160,6 @@
       color: var(--muted);
       font-size: 14px;
       margin-top: 12px;
-    }
-
-    @media (max-width:640px) {
-      .help-left {
-        align-items: flex-start;
-      }
     }
   </style>
 </head>
@@ -225,11 +208,13 @@
   </main>
 
   <script>
+    // Moves gradient dynamically with cursor
     document.addEventListener('mousemove', e => {
       const x = (e.clientX / window.innerWidth) * 100;
       const y = (e.clientY / window.innerHeight) * 100;
       document.body.style.setProperty('--x', x + '%');
       document.body.style.setProperty('--y', y + '%');
+      document.body.style.background = `radial-gradient(circle at ${x}% ${y}%, var(--bg1), var(--bg2), var(--bg3))`;
     });
   </script>
 </body>
